@@ -4,30 +4,39 @@
 using namespace std;
 
 template <typename T>
+class Complex;
+
+template <typename T>
+Complex<T>& __doapl(Complex<T>* ths, Complex<T>& r);
+
+template <typename T>
 class Complex
 {
-    private:
-        T re, im;
-    public:
-        Complex (T r=0, T i=0):re(r),im(i)
-        {}
-        inline T real() const {return re;}
-        inline T imag() const {return im;}
+public:
+    Complex (T r=0, T i=0):re(r),im(i) {}
+    T real() const {return re;}
+    T imag() const {return im;}
 
-        inline Complex& operator += (const Complex& adder)
-        {
-            return __doapl(this, adder);
-        }
+    Complex& operator += (const Complex& );
 
-        Complex conj()
-        {
-            return Complex(this->re, -this->im);
-        }
-        template <typename U>
-        friend inline Complex<U>& __doapl(Complex<U>* ths, const Complex<U>& adder);
+    Complex conj()
+    {
+        return Complex(this->re, -this->im);
+    }
+    template <typename U>
+    friend Complex<U>& __doapl(Complex<U>*, const Complex<U>&);
+
+private:
+    T re, im;
 
 
 };
+
+template <typename T>
+inline Complex<T>& Complex<T>::operator += (const Complex<T>& r)
+{
+    return __doapl(this, r);
+} 
 
 template <typename T>
 Complex<T> operator +(const Complex<T>& a, const Complex<T>& b)
@@ -61,3 +70,4 @@ ostream& operator << (ostream& os, const Complex<T>& cmpl)
 }
 
 #endif
+
