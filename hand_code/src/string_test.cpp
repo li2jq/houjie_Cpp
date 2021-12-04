@@ -16,9 +16,10 @@ int main()
 
     cout << "c3 is ctor from " << c3 << endl;
     
-    String c5;
+    String c5 = "check char";
     cout << "c5 g_cstr_data" << hex << c5 << endl;
-    
+    const char * char_pointer = c5.g_cstr_data();
+    cout << "char pointer " << char_pointer[2] << endl; 
     String c6("Are you ok? ");
     cout << "c6: " << c6 << endl;
 
