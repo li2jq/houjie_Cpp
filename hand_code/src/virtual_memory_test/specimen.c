@@ -13,7 +13,7 @@ int main()
 {
 	/* Allocate 1024 bytes in heap */
 	char *ptr = NULL;
-	ptr = malloc(MEM_LENGTH);
+	ptr = (char*) malloc(MEM_LENGTH);
 	if (!ptr) {
 		perror("malloc fails. ");
 		return -1;
